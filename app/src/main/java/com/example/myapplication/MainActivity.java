@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -14,15 +16,32 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private boolean startStop = false;
     private int count;
+    private Animation buttonAnimation, redAnim, yellowAnim, greenAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //button = findViewById(R.id.button);
+        init();
+    }
+
+    private void init(){
+        buttonAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_anim);
+        redAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_anim);
+        yellowAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_anim);
+        greenAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.logo_anim);
+
+        button = findViewById(R.id.button);
         red = findViewById(R.id.red);
         yellow = findViewById(R.id.yellow);
         green = findViewById(R.id.green);
-        button = findViewById(R.id.button);
+
+        button.startAnimation(buttonAnimation);
+        red.startAnimation(redAnim);
+        yellow.startAnimation(yellowAnim);
+        green.startAnimation(greenAnim);
     }
 
     public void onClickStart(View view) {
